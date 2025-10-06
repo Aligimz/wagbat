@@ -1,0 +1,1953 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>دفتر الدروس والواجبات</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root{
+      --bg: #0b1117; 
+      --paper: #0f1621; 
+      --ink: #e6edf3; 
+      --muted: #a9b5c3; 
+      --line: #1f2b3a; 
+      --brand: #22c1a1; 
+      --accent: #4992ff; 
+      --danger: #ff6b6b;
+      --success: #4caf50;
+      --warning: #ff9800;
+      --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      --transition: all 0.3s ease;
+      --radius: 16px;
+    }
+    
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family:"Tajawal",system-ui,Segoe UI,Arial,sans-serif;
+      line-height:1.6;
+    }
+    a{color:inherit; text-decoration:none}
+    
+    .container{
+      max-width:1200px;
+      margin-inline:auto;
+      padding:24px;
+    }
+    
+    header.app{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      padding:16px 0;
+      border-bottom:1px solid var(--line);
+      position:sticky;
+      top:0;
+      background:linear-gradient(180deg,rgba(11,17,23,.96),rgba(11,17,23,.75));
+      backdrop-filter:saturate(150%) blur(6px);
+      z-index:100;
+    }
+    
+    .logo{
+      width:42px;
+      height:42px;
+      border-radius:12px;
+      background:linear-gradient(135deg,var(--brand),var(--accent));
+      display:grid;
+      place-items:center;
+      font-weight:800;
+      color:#05251e;
+      font-size:18px;
+      box-shadow: var(--card-shadow);
+    }
+    
+    .title{
+      font-size:22px;
+      font-weight:800;
+      background: linear-gradient(135deg, var(--brand), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .sub{
+      color:var(--muted);
+      font-size:14px;
+    }
+    
+    .spacer{flex:1}
+    
+    .btn{
+      border:1px solid var(--line);
+      background:#0e1724;
+      color:var(--ink);
+      padding:10px 16px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:700;
+      transition:var(--transition);
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:14px;
+    }
+    
+    .btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-brand{
+      background:linear-gradient(135deg,var(--brand),#15a58a);
+      border:none;
+      color:#05251e;
+    }
+    
+    .btn-ghost{
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.1);
+    }
+    
+    .btn-danger{
+      background:linear-gradient(135deg,#ff8d8d,var(--danger));
+      border:none;
+      color:#2a0000;
+    }
+    
+    .btn-success{
+      background:linear-gradient(135deg, #6fcf97, var(--success));
+      border:none;
+      color:#05251e;
+    }
+    
+    .grid{display:grid; gap:16px}
+    
+    .card{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:20px;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+    }
+    
+    .card:hover {
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+    
+    .row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    
+    input,select,textarea{
+      width:100%;
+      background:#0b1420;
+      color:var(--ink);
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:12px 14px;
+      outline:none;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+    
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 2px rgba(34, 193, 161, 0.2);
+    }
+    
+    textarea{
+      min-height:100px;
+      resize:vertical;
+    }
+    
+    label{
+      font-size:14px;
+      color:var(--muted);
+      margin-bottom:6px;
+      display:block;
+      font-weight:500;
+    }
+    
+    .tabs{
+      display:flex;
+      gap:6px;
+      flex-wrap:wrap;
+      background: var(--paper);
+      padding: 8px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+    }
+    
+    .tab{
+      padding:12px 18px;
+      border-radius:12px;
+      border:1px solid transparent;
+      cursor:pointer;
+      color:var(--muted);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+    }
+    
+    .tab:hover {
+      background: rgba(255,255,255,0.05);
+    }
+    
+    .tab.active{
+      background:linear-gradient(135deg,rgba(34,193,161,.2),rgba(73,146,255,.15));
+      color:var(--ink);
+      border-color:#274056;
+    }
+    
+    .list{display:grid; gap:12px}
+    
+    .item{
+      display:grid;
+      gap:8px;
+      padding:16px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:#0b1420;
+      transition: var(--transition);
+    }
+    
+    .item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    .item h4{
+      margin:0;
+      font-size:16px;
+      font-weight:700;
+    }
+    
+    .muted{color:var(--muted); font-size:14px;}
+    
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      font-size:12px;
+      color:var(--muted);
+      font-weight:500;
+    }
+    
+    .badge.good{
+      border-color:#20503f;
+      color:#9ce0cb;
+      background:rgba(34,193,161,.08);
+    }
+    
+    .badge.warn{
+      border-color:#3a4b6b;
+      color:#9fc4ff;
+      background:rgba(73,146,255,.08);
+    }
+    
+    .badge.danger{
+      border-color:#6b3a3a;
+      color:#ffc2c2;
+      background:rgba(255,107,107,.08);
+    }
+    
+    .toolbar{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items: center;
+    }
+    
+    .toolbar input{
+      max-width:280px;
+    }
+    
+    .empty{
+      padding:40px;
+      text-align:center;
+      color:var(--muted);
+      font-size:16px;
+    }
+    
+    .empty i {
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+    
+    .footer{
+      margin-top:40px;
+      padding:20px;
+      color:var(--muted);
+      text-align:center;
+      border-top:1px solid var(--line);
+      font-size:14px;
+    }
+    
+    .pill{
+      padding:8px 14px;
+      border-radius:999px;
+      background:#0a1220;
+      border:1px solid var(--line);
+      font-size:13px;
+      font-weight:500;
+    }
+    
+    .hidden{display:none}
+    
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    
+    .stat-card {
+      background: var(--paper);
+      border-radius: var(--radius);
+      padding: 16px;
+      text-align: center;
+      border: 1px solid var(--line);
+    }
+    
+    .stat-value {
+      font-size: 28px;
+      font-weight: 800;
+      margin: 8px 0;
+      background: linear-gradient(135deg, var(--brand), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .stat-label {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    
+    .progress-bar {
+      height: 6px;
+      background: var(--line);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(135deg, var(--brand), var(--accent));
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+    
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+    }
+    
+    .day-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      min-height: 180px;
+    }
+    
+    .day-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+    }
+    
+    .day-name {
+      font-weight: 700;
+      font-size: 14px;
+    }
+    
+    .day-date {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    
+    .day-content {
+      display: grid;
+      gap: 8px;
+    }
+    
+    .day-item {
+      padding: 8px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+      font-size: 13px;
+    }
+    
+    .notification {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--paper);
+      color: var(--ink);
+      padding: 12px 20px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      z-index: 1001;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 400px;
+      width: 90%;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .notification.show {
+      opacity: 1;
+    }
+    
+    .notification.success {
+      border-left: 4px solid var(--success);
+    }
+    
+    .notification.error {
+      border-left: 4px solid var(--danger);
+    }
+    
+    .notification.info {
+      border-left: 4px solid var(--accent);
+    }
+    
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1002;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .modal.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .modal-content {
+      background: var(--paper);
+      border-radius: var(--radius);
+      padding: 24px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+    
+    .modal.show .modal-content {
+      transform: translateY(0);
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    
+    .modal-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0;
+    }
+    
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 20px;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      transition: var(--transition);
+    }
+    
+    .modal-close:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--ink);
+    }
+    
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: var(--brand);
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .context-menu {
+      position: absolute;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      z-index: 1000;
+      min-width: 150px;
+    }
+    
+    .context-menu-item {
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+    }
+    
+    .context-menu-item:hover {
+      background: rgba(255,255,255,0.05);
+    }
+    
+    /* Video Recording Styles */
+    .video-container {
+      margin-top: 16px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #0b1420;
+      border: 1px solid var(--line);
+    }
+    
+    .video-preview {
+      width: 100%;
+      max-height: 300px;
+      background: #000;
+      display: none;
+    }
+    
+    .video-controls {
+      display: flex;
+      gap: 8px;
+      padding: 12px;
+      background: #0b1420;
+      border-top: 1px solid var(--line);
+    }
+    
+    .video-recording {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--danger);
+      font-weight: 500;
+    }
+    
+    .recording-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--danger);
+      animation: pulse 1.5s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+    
+    .video-item {
+      margin-top: 8px;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .video-item video {
+      width: 100%;
+      max-height: 200px;
+      background: #000;
+    }
+    
+    .video-actions {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      display: flex;
+      gap: 8px;
+    }
+    
+    /* Attachments */
+    .attachments {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    
+    .attachment {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+      font-size: 13px;
+    }
+    
+    /* Export/Import */
+    .data-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    
+    /* Subject Colors */
+    .subject-color {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-left: 6px;
+    }
+    
+    /* Timer */
+    .timer {
+      font-family: monospace;
+      font-size: 14px;
+      background: rgba(0,0,0,0.3);
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 16px;
+      }
+      
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .toolbar input, .toolbar select {
+        max-width: 100%;
+      }
+      
+      .week-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      header.app {
+        flex-wrap: wrap;
+      }
+      
+      .tabs {
+        overflow-x: auto;
+        padding-bottom: 8px;
+      }
+      
+      .video-controls {
+        flex-wrap: wrap;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+      
+      .card {
+        padding: 16px;
+      }
+      
+      .btn {
+        padding: 10px 12px;
+        font-size: 13px;
+      }
+      
+      .data-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="app">
+      <div class="logo"><i class="fas fa-book-open"></i></div>
+      <div>
+        <div class="title">دفتر الدروس والواجبات</div>
+        <div class="sub">وثّق دروسك، رتّب واجباتك، وخلِّ المعدل يبتسم 😎</div>
+      </div>
+      <div class="spacer"></div>
+      <div class="row" style="align-items:center">
+        <span class="pill"><i class="fas fa-user"></i> وضع الزائر</span>
+      </div>
+    </header>
+
+    <!-- APP TABS -->
+    <section style="margin-top:16px">
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-label">الدروس المضافة</div>
+          <div class="stat-value" id="lessonsCount">0</div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="lessonsProgress" style="width: 0%"></div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">الواجبات المعلقة</div>
+          <div class="stat-value" id="tasksCount">0</div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="tasksProgress" style="width: 0%"></div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">الواجبات المنجزة</div>
+          <div class="stat-value" id="doneCount">0</div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="doneProgress" style="width: 0%"></div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">متوسط الإنتاجية</div>
+          <div class="stat-value" id="productivity">0%</div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="productivityProgress" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="tabs" id="tabs">
+        <div data-tab="lessons" class="tab active"><i class="fas fa-book"></i> الدروس</div>
+        <div data-tab="assignments" class="tab"><i class="fas fa-tasks"></i> الواجبات</div>
+        <div data-tab="week" class="tab"><i class="fas fa-calendar-week"></i> جدول الأسبوع</div>
+        <div data-tab="done" class="tab"><i class="fas fa-check-circle"></i> تم الإنجاز</div>
+        <div data-tab="settings" class="tab"><i class="fas fa-cog"></i> الإعدادات</div>
+      </div>
+
+      <!-- LESSONS -->
+      <div id="tab-lessons" class="card" style="margin-top:12px">
+        <h3 style="margin:0 0 12px 0"><i class="fas fa-plus-circle"></i> إضافة درس</h3>
+        <div class="grid" style="grid-template-columns:repeat(auto-fit, minmax(200px, 1fr))">
+          <div>
+            <label><i class="fas fa-bookmark"></i> المادة</label>
+            <input id="lessonSubject" placeholder="مثال: عربي / فيزياء">
+          </div>
+          <div>
+            <label><i class="fas fa-heading"></i> عنوان الدرس</label>
+            <input id="lessonTitle" placeholder="المبتدأ والخبر / الضغط الجوي">
+          </div>
+          <div>
+            <label><i class="fas fa-calendar"></i> تاريخ الدرس</label>
+            <input id="lessonDate" type="date">
+          </div>
+          <div>
+            <label><i class="fas fa-link"></i> رابط/مصدر (اختياري)</label>
+            <input id="lessonLink" placeholder="رابط فيديو/ملف">
+          </div>
+        </div>
+        <div style="margin-top:10px">
+          <label><i class="fas fa-sticky-note"></i> ملاحظات</label>
+          <textarea id="lessonNotes" placeholder="أكتب أهم النقاط، التعاريف، الأمثلة..."></textarea>
+        </div>
+        <div class="row" style="margin-top:10px">
+          <button id="addLesson" class="btn btn-brand"><i class="fas fa-save"></i> حفظ الدرس</button>
+        </div>
+        <hr style="border-color:var(--line);margin:16px 0">
+        <div class="toolbar">
+          <input id="lessonSearch" placeholder="بحث بالعنوان/المادة">
+          <select id="lessonSort">
+            <option value="new">الأحدث أولاً</option>
+            <option value="old">الأقدم أولاً</option>
+            <option value="date">حسب تاريخ الدرس</option>
+          </select>
+        </div>
+        <div id="lessonList" class="list" style="margin-top:12px"></div>
+        <div id="lessonEmpty" class="empty">
+          <i class="fas fa-book"></i>
+          <div>لا توجد دروس حتى الآن — أول درس يغير اللعبة ✨</div>
+        </div>
+      </div>
+
+      <!-- ASSIGNMENTS -->
+      <div id="tab-assignments" class="card hidden" style="margin-top:12px">
+        <h3 style="margin:0 0 12px 0"><i class="fas fa-plus-circle"></i> إضافة واجب</h3>
+        <div class="grid" style="grid-template-columns:repeat(auto-fit, minmax(200px, 1fr))">
+          <div>
+            <label><i class="fas fa-bookmark"></i> المادة</label>
+            <input id="taskSubject" placeholder="مثال: رياضيات">
+          </div>
+          <div>
+            <label><i class="fas fa-heading"></i> عنوان الواجب</label>
+            <input id="taskTitle" placeholder="حل صفحة 32 تمارين 1-5">
+          </div>
+          <div>
+            <label><i class="fas fa-calendar"></i> تاريخ التسليم</label>
+            <input id="taskDue" type="date">
+          </div>
+          <div>
+            <label><i class="fas fa-flag"></i> الأولوية</label>
+            <select id="taskPriority">
+              <option value="normal">عادية</option>
+              <option value="high">عالية</option>
+              <option value="low">منخفضة</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-top:10px">
+          <label><i class="fas fa-sticky-note"></i> ملاحظات</label>
+          <textarea id="taskNotes" placeholder="التعليمات، نقاط التصحيح، المطلوب بالضبط..."></textarea>
+        </div>
+        
+        <!-- Video Recording Section -->
+        <div style="margin-top:16px">
+          <label><i class="fas fa-video"></i> تسجيل فيديو للواجب (اختياري)</label>
+          <div class="video-container">
+            <video id="videoPreview" class="video-preview" autoplay muted></video>
+            <div class="video-controls">
+              <button id="startRecording" class="btn btn-danger"><i class="fas fa-record-vinyl"></i> بدء التسجيل</button>
+              <button id="stopRecording" class="btn" disabled><i class="fas fa-stop"></i> إيقاف التسجيل</button>
+              <button id="playRecording" class="btn" disabled><i class="fas fa-play"></i> معاينة</button>
+              <div class="video-recording hidden" id="recordingStatus">
+                <div class="recording-indicator"></div>
+                <span>جاري التسجيل...</span>
+                <div class="timer" id="recordingTimer">00:00</div>
+              </div>
+            </div>
+          </div>
+          <div id="recordedVideos" class="attachments"></div>
+        </div>
+        
+        <div class="row" style="margin-top:10px">
+          <button id="addTask" class="btn btn-brand"><i class="fas fa-save"></i> حفظ الواجب</button>
+        </div>
+        <hr style="border-color:var(--line);margin:16px 0">
+        <div class="toolbar">
+          <input id="taskSearch" placeholder="بحث بالعنوان/المادة">
+          <select id="taskFilter">
+            <option value="open">قيد التنفيذ</option>
+            <option value="all">الكل</option>
+          </select>
+          <select id="taskSort">
+            <option value="due">الأقرب للتسليم</option>
+            <option value="new">الأحدث أولاً</option>
+          </select>
+        </div>
+        <div id="taskList" class="list" style="margin-top:12px"></div>
+        <div id="taskEmpty" class="empty">
+          <i class="fas fa-tasks"></i>
+          <div>لا توجد واجبات… وقت مناسب تسبق غيرك 😉</div>
+        </div>
+      </div>
+
+      <!-- WEEK VIEW -->
+      <div id="tab-week" class="card hidden" style="margin-top:12px">
+        <h3 style="margin:0 0 12px 0"><i class="fas fa-calendar-week"></i> جدول الأسبوع</h3>
+        <div class="week-grid">
+          <div class="day-card">
+            <div class="day-header">
+              <div class="day-name">السبت</div>
+              <div class="day-date" id="date-6"></div>
+            </div>
+            <div class="day-content" id="day-6"></div>
+          </div>
+          <div class="day-card">
+            <div class="day-header">
+              <div class="day-name">الأحد</div>
+              <div class="day-date" id="date-0"></div>
+            </div>
+            <div class="day-content" id="day-0"></div>
+          </div>
+          <div class="day-card">
+            <div class="day-header">
+              <div class="day-name">الاثنين</div>
+              <div class="day-date" id="date-1"></div>
+            </div>
+            <div class="day-content" id="day-1"></div>
+          </div>
+          <div class="day-card">
+            <div class="day-header">
+              <div class="day-name">الثلاثاء</div>
+              <div class="day-date" id="date-2"></div>
+            </div>
+            <div class="day-content" id="day-2"></div>
+          </div>
+          <div class="day-card">
+            <div class="day-header">
+              <div class="day-name">الأربعاء</div>
+              <div class="day-date" id="date-3"></div>
+            </div>
+            <div class="day-content" id="day-3"></div>
+          </div>
+          <div class="day-card">
+            <div class="day-header">
+              <div class="day-name">الخميس</div>
+              <div class="day-date" id="date-4"></div>
+            </div>
+            <div class="day-content" id="day-4"></div>
+          </div>
+          <div class="day-card">
+            <div class="day-header">
+              <div class="day-name">الجمعة</div>
+              <div class="day-date" id="date-5"></div>
+            </div>
+            <div class="day-content" id="day-5"></div>
+          </div>
+        </div>
+        <small class="muted"><i class="fas fa-info-circle"></i> يظهر هنا الدروس حسب تاريخها + الواجبات حسب تاريخ تسليمها.</small>
+      </div>
+
+      <!-- DONE -->
+      <div id="tab-done" class="card hidden" style="margin-top:12px">
+        <h3 style="margin:0 0 12px 0"><i class="fas fa-check-circle"></i> تم الإنجاز ✅</h3>
+        <div id="doneList" class="list"></div>
+        <div id="doneEmpty" class="empty">
+          <i class="fas fa-check-circle"></i>
+          <div>ماكو إنجازات بعد؟ تعال نسوي أول واحد! 💪</div>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div id="tab-settings" class="card hidden" style="margin-top:12px">
+        <h3 style="margin:0 0 12px 0"><i class="fas fa-cog"></i> الإعدادات</h3>
+        <div class="grid" style="grid-template-columns:repeat(auto-fit, minmax(250px, 1fr))">
+          <div>
+            <label><i class="fas fa-palette"></i> لون التطبيق</label>
+            <select id="themeColor">
+              <option value="default">الأخضر (الافتراضي)</option>
+              <option value="blue">الأزرق</option>
+              <option value="purple">البنفسجي</option>
+              <option value="orange">البرتقالي</option>
+            </select>
+          </div>
+          <div>
+            <label><i class="fas fa-bell"></i> التذكيرات</label>
+            <select id="reminders">
+              <option value="enabled">مفعلة</option>
+              <option value="disabled">معطلة</option>
+            </select>
+          </div>
+          <div>
+            <label><i class="fas fa-language"></i> اللغة</label>
+            <select id="language">
+              <option value="ar">العربية</option>
+              <option value="en">English</option>
+            </select>
+          </div>
+          <div>
+            <label><i class="fas fa-download"></i> النسخ الاحتياطي</label>
+            <div class="data-actions">
+              <button id="exportData" class="btn"><i class="fas fa-file-export"></i> تصدير البيانات</button>
+              <button id="importData" class="btn"><i class="fas fa-file-import"></i> استيراد البيانات</button>
+              <input type="file" id="importFile" accept=".json" class="hidden">
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:16px">
+          <button id="resetData" class="btn btn-danger"><i class="fas fa-trash"></i> مسح جميع البيانات</button>
+        </div>
+      </div>
+
+    </section>
+
+    <div class="footer">صُنع بحب للمثابرين — احفظ تعبك أولًا بأول وأترك الباقي علينا ✨</div>
+  </div>
+
+  <!-- MODAL FOR EDITING -->
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">تعديل</h3>
+        <button class="modal-close" id="modalClose">&times;</button>
+      </div>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script>
+    // ===== App Class =====
+    class StudyPlanner {
+      constructor() {
+        this.init();
+      }
+
+      init() {
+        // Initialize UI elements
+        this.initElements();
+        // Initialize event listeners
+        this.initEventListeners();
+        // Load data
+        this.loadData();
+        // Initialize week dates
+        this.initWeekDates();
+        // Render initial data
+        this.renderAll();
+        // Initialize video recording
+        this.initVideoRecording();
+      }
+
+      initElements() {
+        // Stats
+        this.lessonsCount = document.getElementById('lessonsCount');
+        this.tasksCount = document.getElementById('tasksCount');
+        this.doneCount = document.getElementById('doneCount');
+        this.productivity = document.getElementById('productivity');
+        this.lessonsProgress = document.getElementById('lessonsProgress');
+        this.tasksProgress = document.getElementById('tasksProgress');
+        this.doneProgress = document.getElementById('doneProgress');
+        this.productivityProgress = document.getElementById('productivityProgress');
+
+        // Tabs
+        this.tabs = document.getElementById('tabs');
+        this.tabViews = {
+          lessons: document.getElementById('tab-lessons'),
+          assignments: document.getElementById('tab-assignments'),
+          week: document.getElementById('tab-week'),
+          done: document.getElementById('tab-done'),
+          settings: document.getElementById('tab-settings')
+        };
+
+        // Lesson inputs
+        this.lessonSubject = document.getElementById('lessonSubject');
+        this.lessonTitle = document.getElementById('lessonTitle');
+        this.lessonDate = document.getElementById('lessonDate');
+        this.lessonLink = document.getElementById('lessonLink');
+        this.lessonNotes = document.getElementById('lessonNotes');
+        this.addLessonBtn = document.getElementById('addLesson');
+        this.lessonList = document.getElementById('lessonList');
+        this.lessonEmpty = document.getElementById('lessonEmpty');
+        this.lessonSearch = document.getElementById('lessonSearch');
+        this.lessonSort = document.getElementById('lessonSort');
+
+        // Task inputs
+        this.taskSubject = document.getElementById('taskSubject');
+        this.taskTitle = document.getElementById('taskTitle');
+        this.taskDue = document.getElementById('taskDue');
+        this.taskPriority = document.getElementById('taskPriority');
+        this.taskNotes = document.getElementById('taskNotes');
+        this.addTaskBtn = document.getElementById('addTask');
+        this.taskList = document.getElementById('taskList');
+        this.taskEmpty = document.getElementById('taskEmpty');
+        this.taskSearch = document.getElementById('taskSearch');
+        this.taskFilter = document.getElementById('taskFilter');
+        this.taskSort = document.getElementById('taskSort');
+
+        // Video recording elements
+        this.videoPreview = document.getElementById('videoPreview');
+        this.startRecordingBtn = document.getElementById('startRecording');
+        this.stopRecordingBtn = document.getElementById('stopRecording');
+        this.playRecordingBtn = document.getElementById('playRecording');
+        this.recordingStatus = document.getElementById('recordingStatus');
+        this.recordingTimer = document.getElementById('recordingTimer');
+        this.recordedVideos = document.getElementById('recordedVideos');
+
+        // Settings elements
+        this.themeColor = document.getElementById('themeColor');
+        this.reminders = document.getElementById('reminders');
+        this.language = document.getElementById('language');
+        this.exportDataBtn = document.getElementById('exportData');
+        this.importDataBtn = document.getElementById('importData');
+        this.importFile = document.getElementById('importFile');
+        this.resetDataBtn = document.getElementById('resetData');
+
+        // Week & Done
+        this.doneList = document.getElementById('doneList');
+        this.doneEmpty = document.getElementById('doneEmpty');
+
+        this.dayBoxes = {
+          0: document.getElementById('day-0'),
+          1: document.getElementById('day-1'),
+          2: document.getElementById('day-2'),
+          3: document.getElementById('day-3'),
+          4: document.getElementById('day-4'),
+          5: document.getElementById('day-5'),
+          6: document.getElementById('day-6'),
+        };
+
+        this.dateBoxes = {
+          0: document.getElementById('date-0'),
+          1: document.getElementById('date-1'),
+          2: document.getElementById('date-2'),
+          3: document.getElementById('date-3'),
+          4: document.getElementById('date-4'),
+          5: document.getElementById('date-5'),
+          6: document.getElementById('date-6'),
+        };
+
+        // Modal
+        this.editModal = document.getElementById('editModal');
+        this.modalBody = document.getElementById('modalBody');
+        this.modalClose = document.getElementById('modalClose');
+
+        // Video recording variables
+        this.mediaRecorder = null;
+        this.recordedChunks = [];
+        this.recordingStartTime = null;
+        this.recordingTimerInterval = null;
+        this.currentTaskVideos = [];
+      }
+
+      initEventListeners() {
+        // Tabs
+        this.tabs.addEventListener('click', (e) => this.handleTabClick(e));
+        
+        // Lesson events
+        this.addLessonBtn.addEventListener('click', () => this.addLesson());
+        this.lessonSearch.addEventListener('input', () => this.renderLessons());
+        this.lessonSort.addEventListener('change', () => this.renderLessons());
+        
+        // Task events
+        this.addTaskBtn.addEventListener('click', () => this.addTask());
+        this.taskSearch.addEventListener('input', () => this.renderTasks());
+        this.taskFilter.addEventListener('change', () => this.renderTasks());
+        this.taskSort.addEventListener('change', () => this.renderTasks());
+        
+        // Video recording events
+        this.startRecordingBtn.addEventListener('click', () => this.startRecording());
+        this.stopRecordingBtn.addEventListener('click', () => this.stopRecording());
+        this.playRecordingBtn.addEventListener('click', () => this.playRecording());
+        
+        // Settings events
+        this.themeColor.addEventListener('change', () => this.changeTheme());
+        this.reminders.addEventListener('change', () => this.toggleReminders());
+        this.language.addEventListener('change', () => this.changeLanguage());
+        this.exportDataBtn.addEventListener('click', () => this.exportData());
+        this.importDataBtn.addEventListener('click', () => this.importFile.click());
+        this.importFile.addEventListener('change', (e) => this.handleFileImport(e));
+        this.resetDataBtn.addEventListener('click', () => this.resetData());
+        
+        // Modal events
+        this.modalClose.addEventListener('click', () => this.hideModal());
+        this.editModal.addEventListener('click', (e) => {
+          if (e.target === this.editModal) this.hideModal();
+        });
+        
+        // Set today as default for date inputs
+        this.setDefaultDates();
+      }
+
+      initVideoRecording() {
+        // Check if browser supports media recording
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          this.startRecordingBtn.disabled = true;
+          this.startRecordingBtn.title = "التسجيل غير مدعوم في هذا المتصفح";
+          return;
+        }
+
+        // Request camera and microphone access
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+          .then(stream => {
+            this.videoPreview.srcObject = stream;
+            this.videoPreview.style.display = 'block';
+            
+            // Initialize media recorder
+            this.mediaRecorder = new MediaRecorder(stream);
+            
+            this.mediaRecorder.ondataavailable = (event) => {
+              if (event.data.size > 0) {
+                this.recordedChunks.push(event.data);
+              }
+            };
+            
+            this.mediaRecorder.onstop = () => {
+              const blob = new Blob(this.recordedChunks, { type: 'video/webm' });
+              const url = URL.createObjectURL(blob);
+              
+              // Add video to current task videos
+              const videoId = 'video_' + Date.now();
+              this.currentTaskVideos.push({
+                id: videoId,
+                url: url,
+                timestamp: new Date().toISOString()
+              });
+              
+              // Display recorded video
+              this.displayRecordedVideo(videoId, url);
+              
+              // Reset recording state
+              this.recordedChunks = [];
+              this.stopRecordingBtn.disabled = true;
+              this.playRecordingBtn.disabled = false;
+              this.recordingStatus.classList.add('hidden');
+              clearInterval(this.recordingTimerInterval);
+            };
+          })
+          .catch(error => {
+            console.error('Error accessing camera:', error);
+            this.startRecordingBtn.disabled = true;
+            this.startRecordingBtn.title = "لا يمكن الوصول إلى الكاميرا/الميكروفون";
+          });
+      }
+
+      startRecording() {
+        if (!this.mediaRecorder) return;
+        
+        this.recordedChunks = [];
+        this.mediaRecorder.start();
+        this.recordingStartTime = Date.now();
+        
+        // Update UI
+        this.startRecordingBtn.disabled = true;
+        this.stopRecordingBtn.disabled = false;
+        this.playRecordingBtn.disabled = true;
+        this.recordingStatus.classList.remove('hidden');
+        
+        // Start timer
+        this.updateRecordingTimer();
+        this.recordingTimerInterval = setInterval(() => this.updateRecordingTimer(), 1000);
+      }
+
+      stopRecording() {
+        if (!this.mediaRecorder || this.mediaRecorder.state === 'inactive') return;
+        
+        this.mediaRecorder.stop();
+        this.startRecordingBtn.disabled = false;
+      }
+
+      playRecording() {
+        if (this.currentTaskVideos.length === 0) return;
+        
+        const lastVideo = this.currentTaskVideos[this.currentTaskVideos.length - 1];
+        const videoElement = document.createElement('video');
+        videoElement.src = lastVideo.url;
+        videoElement.controls = true;
+        videoElement.style.width = '100%';
+        videoElement.style.maxHeight = '300px';
+        
+        // Show in modal
+        this.modalBody.innerHTML = `
+          <h4>معاينة الفيديو المسجل</h4>
+          <div style="margin-top: 16px">
+            ${videoElement.outerHTML}
+          </div>
+          <div class="row" style="margin-top: 16px">
+            <button id="deleteVideo" class="btn btn-danger" data-id="${lastVideo.id}"><i class="fas fa-trash"></i> حذف الفيديو</button>
+          </div>
+        `;
+        
+        this.showModal();
+        
+        document.getElementById('deleteVideo').addEventListener('click', (e) => {
+          const videoId = e.target.dataset.id;
+          this.deleteVideo(videoId);
+          this.hideModal();
+        });
+      }
+
+      updateRecordingTimer() {
+        if (!this.recordingStartTime) return;
+        
+        const elapsed = Math.floor((Date.now() - this.recordingStartTime) / 1000);
+        const minutes = Math.floor(elapsed / 60).toString().padStart(2, '0');
+        const seconds = (elapsed % 60).toString().padStart(2, '0');
+        this.recordingTimer.textContent = `${minutes}:${seconds}`;
+      }
+
+      displayRecordedVideo(id, url) {
+        const videoElement = document.createElement('div');
+        videoElement.className = 'video-item';
+        videoElement.innerHTML = `
+          <video src="${url}" controls></video>
+          <div class="video-actions">
+            <button class="btn btn-danger btn-small" data-video-id="${id}"><i class="fas fa-trash"></i></button>
+          </div>
+        `;
+        
+        this.recordedVideos.appendChild(videoElement);
+        
+        // Add delete event listener
+        videoElement.querySelector('button').addEventListener('click', (e) => {
+          const videoId = e.target.closest('button').dataset.videoId;
+          this.deleteVideo(videoId);
+          videoElement.remove();
+        });
+      }
+
+      deleteVideo(videoId) {
+        this.currentTaskVideos = this.currentTaskVideos.filter(v => v.id !== videoId);
+        
+        // Also remove from tasks if already saved
+        this.tasks.forEach(task => {
+          if (task.videos) {
+            task.videos = task.videos.filter(v => v.id !== videoId);
+          }
+        });
+        
+        this.saveData();
+      }
+
+      loadData() {
+        this.lessons = JSON.parse(localStorage.getItem('lessons')) || [];
+        this.tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        
+        // Load settings
+        const settings = JSON.parse(localStorage.getItem('settings')) || {};
+        this.themeColor.value = settings.themeColor || 'default';
+        this.reminders.value = settings.reminders || 'enabled';
+        this.language.value = settings.language || 'ar';
+        
+        // Apply settings
+        this.changeTheme();
+      }
+
+      saveData() {
+        localStorage.setItem('lessons', JSON.stringify(this.lessons));
+        localStorage.setItem('tasks', JSON.stringify(this.tasks));
+        
+        // Save settings
+        const settings = {
+          themeColor: this.themeColor.value,
+          reminders: this.reminders.value,
+          language: this.language.value
+        };
+        localStorage.setItem('settings', JSON.stringify(settings));
+        
+        this.updateStats();
+        this.renderLessons();
+        this.renderTasks();
+        this.renderDone();
+        this.renderWeek();
+      }
+
+      setDefaultDates() {
+        const today = new Date().toISOString().slice(0,10);
+        this.lessonDate.value = today;
+        this.taskDue.value = today;
+      }
+
+      initWeekDates() {
+        const today = new Date();
+        const dayOfWeek = today.getDay(); // 0=Sunday, 6=Saturday
+        
+        for (let i = 0; i < 7; i++) {
+          const date = new Date(today);
+          date.setDate(today.getDate() - dayOfWeek + i);
+          this.dateBoxes[i].textContent = date.toLocaleDateString('ar-IQ', {day: 'numeric', month: 'short'});
+        }
+      }
+
+      handleTabClick(e) {
+        const tabBtn = e.target.closest('.tab');
+        if(!tabBtn) return;
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tabBtn.classList.add('active');
+        const name = tabBtn.dataset.tab;
+        Object.entries(this.tabViews).forEach(([k, el]) => el.classList.toggle('hidden', k !== name));
+      }
+
+      updateStats() {
+        const lessonCount = this.lessons.length;
+        const taskCount = this.tasks.filter(t => t.status !== 'done').length;
+        const doneTaskCount = this.tasks.filter(t => t.status === 'done').length;
+        const totalTasks = this.tasks.length;
+        const productivityValue = totalTasks > 0 ? Math.round((doneTaskCount / totalTasks) * 100) : 0;
+        
+        this.lessonsCount.textContent = lessonCount;
+        this.tasksCount.textContent = taskCount;
+        this.doneCount.textContent = doneTaskCount;
+        this.productivity.textContent = `${productivityValue}%`;
+        
+        // Animate progress bars
+        setTimeout(() => {
+          this.lessonsProgress.style.width = `${Math.min(lessonCount * 10, 100)}%`;
+          this.tasksProgress.style.width = `${Math.min(taskCount * 10, 100)}%`;
+          this.doneProgress.style.width = `${Math.min(doneTaskCount * 10, 100)}%`;
+          this.productivityProgress.style.width = `${productivityValue}%`;
+        }, 100);
+      }
+
+      addLesson() {
+        const data = {
+          id: Date.now().toString(),
+          subject: this.lessonSubject.value.trim(),
+          title: this.lessonTitle.value.trim(),
+          date: this.lessonDate.value || new Date().toISOString().slice(0,10),
+          link: this.lessonLink.value.trim(),
+          notes: this.lessonNotes.value.trim(),
+          createdAt: new Date().toISOString()
+        };
+        
+        if(!data.title) {
+          this.showNotification('اكتب عنوان الدرس', 'error');
+          return;
+        }
+        
+        this.lessons.unshift(data);
+        this.clearLessonForm();
+        this.saveData();
+        this.showNotification('تم إضافة الدرس بنجاح!', 'success');
+      }
+
+      addTask() {
+        const data = {
+          id: Date.now().toString(),
+          subject: this.taskSubject.value.trim(),
+          title: this.taskTitle.value.trim(),
+          due: this.taskDue.value || new Date().toISOString().slice(0,10),
+          priority: this.taskPriority.value,
+          notes: this.taskNotes.value.trim(),
+          status: 'open',
+          videos: [...this.currentTaskVideos],
+          createdAt: new Date().toISOString()
+        };
+        
+        if(!data.title) {
+          this.showNotification('اكتب عنوان الواجب', 'error');
+          return;
+        }
+        
+        this.tasks.unshift(data);
+        this.clearTaskForm();
+        this.currentTaskVideos = [];
+        this.recordedVideos.innerHTML = '';
+        this.saveData();
+        this.showNotification('تم إضافة الواجب بنجاح!', 'success');
+      }
+
+      clearLessonForm() {
+        this.lessonTitle.value = '';
+        this.lessonNotes.value = '';
+        this.lessonLink.value = '';
+        this.lessonSubject.value = '';
+      }
+
+      clearTaskForm() {
+        this.taskTitle.value = '';
+        this.taskNotes.value = '';
+        this.taskSubject.value = '';
+      }
+
+      renderAll() {
+        this.updateStats();
+        this.renderLessons();
+        this.renderTasks();
+        this.renderDone();
+        this.renderWeek();
+      }
+
+      renderLessons() {
+        const q = this.lessonSearch.value.trim().toLowerCase();
+        let list = this.lessons.filter(x => (x.title + " " + (x.subject || "")).toLowerCase().includes(q));
+        
+        const sort = this.lessonSort.value;
+        if(sort === 'old') list = [...list].reverse();
+        if(sort === 'date') list = [...list].sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+        
+        this.lessonList.innerHTML = list.map(l => this.lessonItem(l)).join('');
+        this.lessonEmpty.style.display = list.length ? 'none' : 'block';
+        
+        // Bind actions
+        this.bindLessonActions();
+      }
+
+      lessonItem(l) {
+        return `
+          <div class="item fade-in">
+            <div class="row" style="justify-content:space-between;align-items:center">
+              <h4><i class="fas fa-book"></i> ${this.escapeHtml(l.title)} <span class="badge">${this.escapeHtml(l.subject || 'غير محدد')}</span></h4>
+              <div class="row">
+                ${l.link ? `<a class="btn btn-ghost" href="${this.escapeAttr(l.link)}" target="_blank"><i class="fas fa-external-link-alt"></i> رابط</a>` : ''}
+                <button class="btn" data-action="edit" data-id="${l.id}"><i class="fas fa-edit"></i> تعديل</button>
+                <button class="btn btn-danger" data-action="delete" data-id="${l.id}"><i class="fas fa-trash"></i> حذف</button>
+              </div>
+            </div>
+            <div class="muted"><i class="fas fa-calendar"></i> ${l.date ? this.formatDate(l.date) : 'بدون تاريخ'}</div>
+            ${l.notes ? `<div>${this.nl2br(this.escapeHtml(l.notes))}</div>` : ''}
+          </div>`
+      }
+
+      renderTasks() {
+        const q = this.taskSearch.value.trim().toLowerCase();
+        let list = this.tasks.filter(x => (x.title + " " + (x.subject || "")).toLowerCase().includes(q));
+        
+        if(this.taskFilter.value === 'open') list = list.filter(x => x.status !== 'done');
+        if(this.taskSort.value === 'due') list = [...list].sort((a, b) => (a.due || '').localeCompare(b.due || ''));
+        
+        this.taskList.innerHTML = list.map(t => this.taskItem(t)).join('');
+        this.taskEmpty.style.display = list.length ? 'none' : 'block';
+        
+        // Bind actions
+        this.bindTaskActions();
+      }
+
+      taskItem(t) {
+        const due = t.due ? new Date(t.due) : null;
+        const overdue = due && (due < new Date()) && t.status !== 'done';
+        const pr = t.priority || 'normal';
+        const badgeCls = pr === 'high' ? 'danger' : pr === 'low' ? '' : 'warn';
+        const icon = t.status === 'done' ? 'check-circle' : 'tasks';
+        const hasVideos = t.videos && t.videos.length > 0;
+        
+        return `
+          <div class="item fade-in">
+            <div class="row" style="justify-content:space-between;align-items:center">
+              <h4><i class="fas fa-${icon}"></i> ${this.escapeHtml(t.title)} <span class="badge ${badgeCls}">${this.escapeHtml(t.subject || 'غير محدد')}</span></h4>
+              <div class="row">
+                ${t.status === 'done' ? `<button class="btn" data-action="undo" data-id="${t.id}"><i class="fas fa-undo"></i> رجوع قيد التنفيذ</button>`
+                                     : `<button class="btn btn-success" data-action="done" data-id="${t.id}"><i class="fas fa-check"></i> تم</button>`}
+                <button class="btn" data-action="edit" data-id="${t.id}"><i class="fas fa-edit"></i> تعديل</button>
+                <button class="btn btn-danger" data-action="delete" data-id="${t.id}"><i class="fas fa-trash"></i> حذف</button>
+              </div>
+            </div>
+            <div class="row" style="gap:10px;align-items:center">
+              <div class="muted"><i class="fas fa-clock"></i> التسليم: ${t.due ? this.formatDate(t.due) : 'غير محدد'}</div>
+              ${overdue ? '<span class="badge danger"><i class="fas fa-exclamation-triangle"></i> متأخر!</span>' : ''}
+              ${hasVideos ? `<span class="badge"><i class="fas fa-video"></i> ${t.videos.length} فيديو</span>` : ''}
+            </div>
+            ${t.notes ? `<div>${this.nl2br(this.escapeHtml(t.notes))}</div>` : ''}
+            ${hasVideos ? this.renderTaskVideos(t) : ''}
+          </div>`
+      }
+
+      renderTaskVideos(task) {
+        return `
+          <div class="attachments">
+            ${task.videos.map(video => `
+              <div class="attachment">
+                <i class="fas fa-video"></i>
+                <span>فيديو</span>
+                <button class="btn btn-ghost btn-small" data-action="play-video" data-video-id="${video.id}" data-task-id="${task.id}">
+                  <i class="fas fa-play"></i>
+                </button>
+                <button class="btn btn-danger btn-small" data-action="delete-video" data-video-id="${video.id}" data-task-id="${task.id}">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      renderDone() {
+        const list = this.tasks.filter(x => x.status === 'done');
+        this.doneList.innerHTML = list.map(t => `
+          <div class="item fade-in">
+            <h4><i class="fas fa-check-circle"></i> ${this.escapeHtml(t.title)} <span class="badge">${this.escapeHtml(t.subject || 'غير محدد')}</span></h4>
+            <div class="muted"><i class="fas fa-clock"></i> سلّم بتاريخ: ${t.due ? this.formatDate(t.due) : 'غير محدد'}</div>
+          </div>
+        `).join('');
+        this.doneEmpty.style.display = list.length ? 'none' : 'block';
+      }
+
+      renderWeek() {
+        // Reset boxes
+        Object.values(this.dayBoxes).forEach(el => el.innerHTML = '');
+        
+        // Lessons by date
+        for(const l of this.lessons) {
+          if(!l.date) continue; 
+          const d = new Date(l.date); 
+          const day = (d.getDay() + 6) % 7; // جعل السبت أول عمود
+          this.dayBoxes[day].innerHTML += `<div class="day-item"><div><i class="fas fa-book"></i> ${this.escapeHtml(l.title)}</div><div class="muted">${this.escapeHtml(l.subject || '')}</div></div>`;
+        }
+        
+        // Tasks by due
+        for(const t of this.tasks) {
+          if(!t.due) continue; 
+          const d = new Date(t.due); 
+          const day = (d.getDay() + 6) % 7;
+          const mark = t.status === 'done' ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-tasks"></i>';
+          this.dayBoxes[day].innerHTML += `<div class="day-item"><div>${mark} ${this.escapeHtml(t.title)}</div><div class="muted">${this.escapeHtml(t.subject || '')}</div></div>`;
+        }
+      }
+
+      bindLessonActions() {
+        this.lessonList.querySelectorAll('[data-action]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.dataset.id; 
+            const action = btn.dataset.action;
+            
+            if(action === 'delete') {
+              if(confirm('هل أنت متأكد من حذف هذا الدرس؟')) {
+                this.lessons = this.lessons.filter(l => l.id !== id);
+                this.saveData();
+                this.showNotification('تم حذف الدرس', 'info');
+              }
+            }
+            
+            if(action === 'edit') {
+              this.showEditLessonModal(id);
+            }
+          });
+        });
+      }
+
+      bindTaskActions() {
+        this.taskList.querySelectorAll('[data-action]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.dataset.id; 
+            const action = btn.dataset.action;
+            const task = this.tasks.find(t => t.id === id);
+            if(!task) return;
+            
+            if(action === 'delete') {
+              if(confirm('هل أنت متأكد من حذف هذا الواجب؟')) {
+                this.tasks = this.tasks.filter(t => t.id !== id);
+                this.saveData();
+                this.showNotification('تم حذف الواجب', 'info');
+              }
+            }
+            
+            if(action === 'done') {
+              task.status = 'done';
+              this.saveData();
+              this.showNotification('تم إنجاز الواجب!', 'success');
+            }
+            
+            if(action === 'undo') {
+              task.status = 'open';
+              this.saveData();
+              this.showNotification('تم إرجاع الواجب إلى قيد التنفيذ', 'info');
+            }
+            
+            if(action === 'edit') {
+              this.showEditTaskModal(id);
+            }
+            
+            if(action === 'play-video') {
+              const videoId = btn.dataset.videoId;
+              const video = task.videos.find(v => v.id === videoId);
+              if(video) {
+                this.playTaskVideo(video);
+              }
+            }
+            
+            if(action === 'delete-video') {
+              const videoId = btn.dataset.videoId;
+              if(confirm('هل أنت متأكد من حذف هذا الفيديو؟')) {
+                task.videos = task.videos.filter(v => v.id !== videoId);
+                this.saveData();
+                this.showNotification('تم حذف الفيديو', 'info');
+              }
+            }
+          });
+        });
+      }
+
+      playTaskVideo(video) {
+        const videoElement = document.createElement('video');
+        videoElement.src = video.url;
+        videoElement.controls = true;
+        videoElement.style.width = '100%';
+        videoElement.style.maxHeight = '400px';
+        
+        this.modalBody.innerHTML = `
+          <h4>فيديو الواجب</h4>
+          <div style="margin-top: 16px">
+            ${videoElement.outerHTML}
+          </div>
+          <div class="muted" style="margin-top: 8px">
+            <i class="fas fa-clock"></i> تم التسجيل في ${this.formatDateTime(video.timestamp)}
+          </div>
+        `;
+        
+        this.showModal();
+      }
+
+      showEditLessonModal(id) {
+        const lesson = this.lessons.find(l => l.id === id);
+        if(!lesson) return;
+        
+        this.modalBody.innerHTML = `
+          <div>
+            <label><i class="fas fa-heading"></i> عنوان الدرس</label>
+            <input id="editLessonTitle" value="${this.escapeAttr(lesson.title)}">
+          </div>
+          <div style="margin-top: 10px">
+            <label><i class="fas fa-bookmark"></i> المادة</label>
+            <input id="editLessonSubject" value="${this.escapeAttr(lesson.subject || '')}">
+          </div>
+          <div style="margin-top: 10px">
+            <label><i class="fas fa-sticky-note"></i> ملاحظات</label>
+            <textarea id="editLessonNotes">${this.escapeAttr(lesson.notes || '')}</textarea>
+          </div>
+          <div class="row" style="margin-top: 16px">
+            <button id="saveLessonEdit" class="btn btn-brand" data-id="${id}"><i class="fas fa-save"></i> حفظ التعديلات</button>
+          </div>
+        `;
+        
+        this.showModal();
+        
+        document.getElementById('saveLessonEdit').addEventListener('click', () => {
+          const newTitle = document.getElementById('editLessonTitle').value.trim();
+          const newSubject = document.getElementById('editLessonSubject').value.trim();
+          const newNotes = document.getElementById('editLessonNotes').value.trim();
+          
+          if(newTitle && newTitle !== lesson.title) {
+            lesson.title = newTitle;
+          }
+          
+          lesson.subject = newSubject;
+          lesson.notes = newNotes;
+          
+          this.saveData();
+          this.hideModal();
+          this.showNotification('تم تعديل الدرس', 'success');
+        });
+      }
+
+      showEditTaskModal(id) {
+        const task = this.tasks.find(t => t.id === id);
+        if(!task) return;
+        
+        this.modalBody.innerHTML = `
+          <div>
+            <label><i class="fas fa-heading"></i> عنوان الواجب</label>
+            <input id="editTaskTitle" value="${this.escapeAttr(task.title)}">
+          </div>
+          <div style="margin-top: 10px">
+            <label><i class="fas fa-bookmark"></i> المادة</label>
+            <input id="editTaskSubject" value="${this.escapeAttr(task.subject || '')}">
+          </div>
+          <div style="margin-top: 10px">
+            <label><i class="fas fa-sticky-note"></i> ملاحظات</label>
+            <textarea id="editTaskNotes">${this.escapeAttr(task.notes || '')}</textarea>
+          </div>
+          <div class="row" style="margin-top: 16px">
+            <button id="saveTaskEdit" class="btn btn-brand" data-id="${id}"><i class="fas fa-save"></i> حفظ التعديلات</button>
+          </div>
+        `;
+        
+        this.showModal();
+        
+        document.getElementById('saveTaskEdit').addEventListener('click', () => {
+          const newTitle = document.getElementById('editTaskTitle').value.trim();
+          const newSubject = document.getElementById('editTaskSubject').value.trim();
+          const newNotes = document.getElementById('editTaskNotes').value.trim();
+          
+          if(newTitle && newTitle !== task.title) {
+            task.title = newTitle;
+          }
+          
+          task.subject = newSubject;
+          task.notes = newNotes;
+          
+          this.saveData();
+          this.hideModal();
+          this.showNotification('تم تعديل الواجب', 'success');
+        });
+      }
+
+      showModal() {
+        this.editModal.classList.add('show');
+      }
+
+      hideModal() {
+        this.editModal.classList.remove('show');
+      }
+
+      showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.innerHTML = `
+          <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+          <span>${message}</span>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+          notification.classList.add('show');
+        }, 10);
+        
+        setTimeout(() => {
+          notification.classList.remove('show');
+          setTimeout(() => {
+            notification.remove();
+          }, 300);
+        }, 4000);
+      }
+
+      // Settings functions
+      changeTheme() {
+        const theme = this.themeColor.value;
+        let brandColor, accentColor;
+        
+        switch(theme) {
+          case 'blue':
+            brandColor = '#4992ff';
+            accentColor = '#22c1a1';
+            break;
+          case 'purple':
+            brandColor = '#9c27b0';
+            accentColor = '#673ab7';
+            break;
+          case 'orange':
+            brandColor = '#ff9800';
+            accentColor = '#ff5722';
+            break;
+          default: // green
+            brandColor = '#22c1a1';
+            accentColor = '#4992ff';
+        }
+        
+        document.documentElement.style.setProperty('--brand', brandColor);
+        document.documentElement.style.setProperty('--accent', accentColor);
+        
+        this.saveData();
+      }
+
+      toggleReminders() {
+        const enabled = this.reminders.value === 'enabled';
+        // In a real app, you would set up browser notifications here
+        this.showNotification(
+          enabled ? 'تم تفعيل التذكيرات' : 'تم تعطيل التذكيرات', 
+          'info'
+        );
+        this.saveData();
+      }
+
+      changeLanguage() {
+        const lang = this.language.value;
+        // In a real app, you would implement full language switching
+        this.showNotification(
+          lang === 'ar' ? 'تم تغيير اللغة إلى العربية' : 'Language changed to English', 
+          'info'
+        );
+        this.saveData();
+      }
+
+      exportData() {
+        const data = {
+          lessons: this.lessons,
+          tasks: this.tasks,
+          exportDate: new Date().toISOString()
+        };
+        
+        const dataStr = JSON.stringify(data, null, 2);
+        const dataBlob = new Blob([dataStr], {type: 'application/json'});
+        
+        const url = URL.createObjectURL(dataBlob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `study-planner-backup-${new Date().toISOString().slice(0,10)}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        this.showNotification('تم تصدير البيانات بنجاح', 'success');
+      }
+
+      handleFileImport(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          try {
+            const data = JSON.parse(event.target.result);
+            
+            if (data.lessons && data.tasks) {
+              if (confirm('هل تريد استبدال البيانات الحالية بالبيانات المستوردة؟')) {
+                this.lessons = data.lessons;
+                this.tasks = data.tasks;
+                this.saveData();
+                this.showNotification('تم استيراد البيانات بنجاح', 'success');
+              }
+            } else {
+              this.showNotification('ملف غير صالح', 'error');
+            }
+          } catch (error) {
+            this.showNotification('خطأ في قراءة الملف', 'error');
+          }
+        };
+        
+        reader.readAsText(file);
+        e.target.value = ''; // Reset file input
+      }
+
+      resetData() {
+        if (confirm('هل أنت متأكد من مسح جميع البيانات؟ لا يمكن التراجع عن هذا الإجراء.')) {
+          this.lessons = [];
+          this.tasks = [];
+          this.saveData();
+          this.showNotification('تم مسح جميع البيانات', 'info');
+        }
+      }
+
+      formatDate(dateStr) {
+        return new Date(dateStr).toLocaleDateString('ar-IQ', {weekday:'short', year:'numeric', month:'short', day:'numeric'});
+      }
+
+      formatDateTime(dateStr) {
+        return new Date(dateStr).toLocaleString('ar-IQ', {
+          weekday: 'short',
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+      }
+
+      // Utility functions
+      escapeHtml(s = '') { 
+        return s.replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c])); 
+      }
+      
+      escapeAttr(s = '') { 
+        return s.replace(/"/g,'&quot;'); 
+      }
+      
+      nl2br(s = '') { 
+        return s.replace(/\n/g,'<br>'); 
+      }
+    }
+
+    // Initialize the app when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      window.studyPlanner = new StudyPlanner();
+    });
+  </script>
+</body>
+</html>
